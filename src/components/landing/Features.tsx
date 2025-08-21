@@ -29,7 +29,7 @@ function Features() {
     <section className="py-20 mb-20">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-bold text-white mb-4">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
             Why Choose Pulse?
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto">
