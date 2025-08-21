@@ -1,8 +1,13 @@
 import React from 'react'
+import Hero from '@/components/landing/Hero'
 
 function page() {
   return (
-    <div>page</div>
+    <div>
+      <section>
+        <Hero />
+      </section>
+    </div>
   )
 }
 

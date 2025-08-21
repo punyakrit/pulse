@@ -1,4 +1,5 @@
 import React from 'react'
+import NavBar from '@/components/global/NavBar'
 
 interface layoutProps {
     children: React.ReactNode
@@ -6,7 +7,8 @@ interface layoutProps {
 
 function layout({children}: layoutProps) {
   return (
-    <div>
+    <div className='flex flex-col '>
+        <NavBar />
         {children}
     </div>
   )
