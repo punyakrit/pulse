@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Activity, Menu, X } from "lucide-react";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 const navItems = [
   {
@@ -27,7 +28,7 @@ function NavBar() {
   };
 
   return (
-    <div className="flex justify-center container mx-auto max-w-4xl">
+    <div className="flex justify-center container mx-auto max-w-4xl z-50">
       <div className="flex justify-between items-center border border-white/15 w-full max-w-6xl my-4 rounded-full px-6 py-2 relative">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-bold">
@@ -53,9 +54,15 @@ function NavBar() {
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex items-center gap-4">
             <Button variant="outline" className="text-sm rounded-full">
-              Login
+              <LoginLink>
+                Login
+              </LoginLink>
             </Button>
-            <Button className="text-sm rounded-full">Sign Up</Button>
+            <Button className="text-sm rounded-full">
+              <RegisterLink>
+                Sign Up
+              </RegisterLink>
+            </Button>
           </div>
           
           <button
@@ -80,9 +87,16 @@ function NavBar() {
             ))}
             <div className="flex flex-col gap-2 pt-4 border-t border-white/15">
               <Button variant="outline" className="text-sm rounded-full w-full">
+                <LoginLink>
+
                 Login
+                </LoginLink>
               </Button>
-              <Button className="text-sm rounded-full w-full">Sign Up</Button>
+              <Button className="text-sm rounded-full w-full">
+                <RegisterLink>
+                  Sign Up
+                  </RegisterLink>
+                  </Button>
             </div>
           </nav>
         </div>

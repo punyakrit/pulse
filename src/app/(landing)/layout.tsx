@@ -1,11 +1,18 @@
 import React from 'react'
 import NavBar from '@/components/global/NavBar'
+import { getUser } from '@/lib/actions/User'
+import { redirect } from 'next/navigation'
 
 interface layoutProps {
     children: React.ReactNode
 }
 
-function layout({children}: layoutProps) {
+async function layout({children}: layoutProps) {
+  const user = await getUser()
+  console.log(user)
+  if(user) {
+    redirect('/dashboard')
+  }
   return (
     <div className='flex flex-col '>
         <NavBar />
