@@ -1,14 +1,15 @@
+
 import { getUser } from '@/lib/actions/User'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import { prisma } from '@/lib/prisma/db'
+import UserInitializer from '@/customHooks/UserInitializer'
 
 interface layoutProps {
     children: React.ReactNode
 }
 
 async function layout({children}: layoutProps) {
-
   const user = await getUser()
   if(!user) {
     redirect('/')
@@ -21,7 +22,7 @@ async function layout({children}: layoutProps) {
   })
 
   if(!userExists) {
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         id: user.id,
         email: user.email as string,
@@ -32,6 +33,7 @@ async function layout({children}: layoutProps) {
 
   return (
     <div>
+      <UserInitializer user={userExists!} />
         {children}
     </div>
   )
