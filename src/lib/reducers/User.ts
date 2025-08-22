@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { User } from "@prisma/client";
 
 const initialState = {
-    user: null,
+    user: null as User | null,
 }
 
 const userSlice = createSlice({

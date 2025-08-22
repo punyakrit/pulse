@@ -1,0 +1,117 @@
+"use client";
+import React, { useState } from "react";
+import { Button } from "../ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Globe, Plus, Zap, Shield, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store/store";
+import { createProjectQuery } from "@/lib/actions/query";
+
+function NoProject() {
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const selectedUser = useSelector((state: RootState) => state.user.user);
+  const router = useRouter();
+  const createProject = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      await createProjectQuery(selectedUser?.id!, name);
+      router.push(`/dashboard`);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl">
+        <Card className="shadow-lg">
+          <CardHeader className="text-center pb-8">
+            <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+              <Globe className="w-10 h-10 text-primary-foreground" />
+            </div>
+            <CardTitle className="text-3xl font-bold mb-4">
+              Welcome to Pulse
+            </CardTitle>
+            <CardDescription className="text-lg max-w-md mx-auto leading-relaxed">
+              Create your first monitoring project to start tracking your
+              website's performance and uptime across the globe.
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="space-y-8">
+            <form onSubmit={createProject} className="space-y-6">
+              <div className="space-y-3">
+                <Label className="font-medium text-base">Project Name</Label>
+                <Input
+                  placeholder="e.g., My Website, E-commerce Store, API Service"
+                  className="h-12 text-lg"
+                  required={true}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                  <Zap className="w-5 h-5 text-yellow-500" />
+                  <div>
+                    <p className="font-medium text-sm">Real-time Monitoring</p>
+                    <p className="text-muted-foreground text-xs">
+                      24/7 uptime tracking
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                  <Globe className="w-5 h-5 text-blue-500" />
+                  <div>
+                    <p className="font-medium text-sm">Global Coverage</p>
+                    <p className="text-muted-foreground text-xs">
+                      Multiple locations
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
+                  <Shield className="w-5 h-5 text-green-500" />
+                  <div>
+                    <p className="font-medium text-sm">Instant Alerts</p>
+                    <p className="text-muted-foreground text-xs">
+                      Never miss downtime
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full py-3 text-lg"
+                disabled={loading}
+              >
+                {loading ? (
+                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                ) : (
+                  <Plus className="w-5 h-5 mr-2" />
+                )}
+                Create Project
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+export default NoProject;
