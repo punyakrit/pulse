@@ -1,11 +1,66 @@
-
-
 generator client {
   provider = "prisma-client-js"
-
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id 
+  email     String    @unique
+  name      String?
+  projects  Project[]
+  createdAt DateTime  @default(now())
+}
+
+model Project {
+  id        String     @id @default(uuid())
+  name      String
+  user      User       @relation(fields: [userId], references: [id])
+  userId    String
+  websites  Website[]
+  settings  Setting?
+  createdAt DateTime   @default(now())
+}
+
+model Website {
+  id        String     @id @default(uuid())
+  url       String
+  project   Project    @relation(fields: [projectId], references: [id])
+  projectId String
+  checks    Check[]
+  alerts    Alert[]
+  createdAt DateTime   @default(now())
+}
+
+model Check {
+  id           String   @id @default(uuid())
+  status       Boolean  // true = up, false = down
+  responseTime Int?     // ms, optional
+  website      Website  @relation(fields: [websiteId], references: [id])
+  websiteId    String
+  errorMessage String?
+  checkedAt    DateTime @default(now())
+}
+
+model Setting {
+  id           String   @id @default(uuid())
+  projectId    String   @unique
+  project      Project  @relation(fields: [projectId], references: [id])
+  status       Boolean  @default(true)
+  interval     Int      @default(300)
+  notifyType   String   // e.g. "email", "slack", "sms"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Alert {
+  id         String   @id @default(uuid())
+  websiteId  String
+  website    Website  @relation(fields: [websiteId], references: [id])
+  message    String
+  createdAt  DateTime @default(now())
+  resolvedAt DateTime?
 }
