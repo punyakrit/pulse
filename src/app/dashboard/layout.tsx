@@ -3,8 +3,10 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { prisma } from "@/lib/prisma/db";
 import UserInitializer from "@/customHooks/UserInitializer";
-import NoProject from "@/components/dashboard/NoProject";
+import NoProject from "@/components/dashboard/globals/NoProject";
 import ProjectInitialize from "@/customHooks/ProjectInitialize";
+import SidebarComponent from "@/components/dashboard/globals/Sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -48,11 +50,17 @@ async function layout({ children }: layoutProps) {
   }
 
   return (
-    <div>
+    <SidebarProvider>
       <UserInitializer user={userExists!} />
       <ProjectInitialize project={projects} />
-      {children}
-    </div>
+      <SidebarComponent />
+      <main className="flex-1">
+        <div className="flex items-center gap-2 p-4">
+          <SidebarTrigger />
+          {children}
+        </div>
+      </main>
+    </SidebarProvider>
   );
 }
 

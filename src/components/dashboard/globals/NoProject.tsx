@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+} from "../../ui/card";
+import { Label } from "../../ui/label";
+import { Input } from "../../ui/input";
 import { Globe, Plus, Zap, Shield, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";

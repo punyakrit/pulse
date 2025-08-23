@@ -22,6 +22,7 @@ model Project {
   userId    String
   websites  Website[]
   settings  Setting?
+  status    String     @default("offline")
   createdAt DateTime   @default(now())
 }
 
