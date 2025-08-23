@@ -57,7 +57,7 @@ async function layout({ children }: layoutProps) {
       <WebisteInitial  userId={user.id} />
       <SidebarComponent />
       <main className="flex-1">
-        <div className="flex flex-col  gap-2 p-4">
+        <div className="flex flex-col">
             {children}
         </div>
       </main>

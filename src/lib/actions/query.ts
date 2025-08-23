@@ -33,11 +33,19 @@ export async function getProjectQuery(userId: string) {
 }
 
 
-export async function createWebsiteQuery(projectId: string, url: string) {
+export async function createWebsiteQueryFirst(projectId: string, url: string) {
     const website = await prisma.website.create({
         data: {
             projectId: projectId,
             url: url,
+        },
+    });
+    const UpdateProject = await prisma.project.update({
+        where: {
+            id: projectId,
+        },
+        data: {
+            status: "online",
         },
     });
     return website;

@@ -3,6 +3,7 @@ import { Website } from "@prisma/client";
 
 const initialState = {
     websites: [] as Website[],
+    loading: true,
 }
 
 const websitesSlice = createSlice({
@@ -11,9 +12,16 @@ const websitesSlice = createSlice({
     reducers: {
         setWebsites: (state, action) => {
             state.websites = action.payload;
+            state.loading = false;
+        },
+        addWebsite: (state, action) => {
+            state.websites.push(action.payload);
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         },
     }
 })
 
-export const { setWebsites } = websitesSlice.actions;
+export const { setWebsites, addWebsite, setLoading } = websitesSlice.actions;
 export default websitesSlice.reducer;

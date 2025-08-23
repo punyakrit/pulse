@@ -1,6 +1,6 @@
 "use client"
 import { getProjectQuery, getWebsitesQuery } from '@/lib/actions/query'
-import { setWebsites } from '@/lib/reducers/Website'
+import { setWebsites, setLoading } from '@/lib/reducers/Website'
 import { RootState } from '@/lib/store/store'
 import { Website } from '@prisma/client'
 import React, { useEffect } from 'react'
@@ -11,19 +11,24 @@ function WebisteInitial({userId}: {userId: string}) {
     useEffect(() => {
         const fetchWebsites = async () => {
             if(userId){
-                const projects = await getProjectQuery(userId);
-                let websites: Website[] = [];
-                if(projects.length > 0){
-                    for(const project of projects){
-                        const website = await getWebsitesQuery(project.id);
-                        websites.push(...website);
+                try {
+                    const projects = await getProjectQuery(userId);
+                    let websites: Website[] = [];
+                    if(projects.length > 0){
+                        for(const project of projects){
+                            const website = await getWebsitesQuery(project.id);
+                            websites.push(...website);
+                        }
                     }
                     dispatch(setWebsites(websites));
+                } catch (error) {
+                    console.error('Error fetching websites:', error);
+                    dispatch(setWebsites([]));
                 }
             }
         }
         fetchWebsites();
-    }, [userId]);
+    }, [userId, dispatch]);
   return (
     null
   )
