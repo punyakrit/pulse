@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import Link from "next/link";
 import {
   Sidebar,
   SidebarContent,
@@ -10,44 +11,24 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuAction,
-  SidebarMenuBadge,
   SidebarSeparator,
-} from "@/components/ui/sidebar"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   LayoutDashboard,
   FolderOpen,
   Globe,
   Bell,
   Settings,
-  User,
   LogOut,
-  ChevronDown,
   Plus,
   Zap,
-  Activity,
-  AlertTriangle,
-  CheckCircle,
-  Clock,
   BarChart3,
-  Shield,
-  Monitor,
-  Database,
-  GitBranch,
-  ExternalLink,
-  MoreHorizontal,
-} from "lucide-react"
-import { RootState } from "@/lib/store/store"
-import { useSelector } from "react-redux"
+} from "lucide-react";
+import { RootState } from "@/lib/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedProject } from "@/lib/reducers/Project";
+import { useEffect } from "react";
 
 const navigationItems = [
   {
@@ -86,8 +67,7 @@ const navigationItems = [
     href: "/dashboard/settings",
     description: "Notifications & integrations",
   },
-]
-
+];
 
 const quickActions = [
   {
@@ -102,21 +82,28 @@ const quickActions = [
     href: "/dashboard/websites/new",
     description: "Monitor a new website",
   },
-]
+];
 
 export default function SidebarComponent() {
-    const {user} = useSelector((state: RootState) => state.user);
-    const {projects} = useSelector((state: RootState) => state.project);
+  const { user } = useSelector((state: RootState) => state.user);
+  const { projects } = useSelector((state: RootState) => state.project);
+  const { selectedProject } = useSelector((state: RootState) => state.project);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSelectedProject(projects[0]));
+  }, [projects]);
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b border-sidebar-border">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/dashboard" className="flex items-center gap-2">
+              <Link href="/dashboard" className="flex items-center gap-2">
                 <Zap className="h-6 w-6 text-primary" />
                 <span className="font-bold text-lg">Pulse</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -130,12 +117,11 @@ export default function SidebarComponent() {
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.description}>
-                    <a href={item.href}>
+                    <Link href={item.href}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
-                  
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
@@ -144,22 +130,32 @@ export default function SidebarComponent() {
 
         <SidebarSeparator />
 
-
         <SidebarGroup>
           <SidebarGroupLabel>Recent Projects</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {projects.map((project) => (
-                <SidebarMenuItem key={project.name}>
+                <SidebarMenuItem
+                  key={project.name}
+                  onClick={() => dispatch(setSelectedProject(project))}
+                  className={`${
+                    project.id === selectedProject?.id ? "bg-primary/10 rounded-lg" : ""
+                  }`}
+                >
                   <SidebarMenuButton asChild tooltip={project.name}>
-                    <a href={`/dashboard/projects/${project.id}`}>
+                    <Link href={`/dashboard/projects/${project.id}`}>
                       <Globe className="h-6 w-6 text-primary" />
                       <span>{project.name}</span>
-                  <div className={`w-2 h-2 rounded-full ml-auto ${
-                    project.status === 'online' ? 'bg-green-500' : 
-                    project.status === 'offline' ? 'bg-yellow-500' : 'bg-red-500'
-                    }`} />
-                    </a>
+                      <div
+                        className={`w-2 h-2 rounded-full ml-auto ${
+                          project.status === "online"
+                            ? "bg-green-500"
+                            : project.status === "offline"
+                            ? "bg-yellow-500"
+                            : "bg-red-500"
+                        }`}
+                      />
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -176,10 +172,10 @@ export default function SidebarComponent() {
               {quickActions.map((action) => (
                 <SidebarMenuItem key={action.title}>
                   <SidebarMenuButton asChild tooltip={action.description}>
-                    <a href={action.href}>
+                    <Link href={action.href}>
                       <action.icon />
                       <span>{action.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -191,20 +187,19 @@ export default function SidebarComponent() {
       <SidebarFooter className="border-t border-sidebar-border">
         <SidebarMenu>
           <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <button className="w-full">
-                    <Avatar className="h-6 w-6">
-                      <AvatarImage src="/api/avatar" alt="User" />
-                      <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <span>{user?.name}</span>
-                    <LogOut className="ml-auto h-4 w-4" />
-                  </button>
-                </SidebarMenuButton>
-             
+            <SidebarMenuButton asChild>
+              <button className="w-full">
+                <Avatar className="h-6 w-6">
+                  <AvatarImage src="/api/avatar" alt="User" />
+                  <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <span>{user?.name}</span>
+                <LogOut className="ml-auto h-4 w-4" />
+              </button>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

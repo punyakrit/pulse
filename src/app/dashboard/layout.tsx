@@ -7,6 +7,7 @@ import NoProject from "@/components/dashboard/globals/NoProject";
 import ProjectInitialize from "@/customHooks/ProjectInitialize";
 import SidebarComponent from "@/components/dashboard/globals/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import WebisteInitial from "@/customHooks/WebisteInitial";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -53,11 +54,11 @@ async function layout({ children }: layoutProps) {
     <SidebarProvider>
       <UserInitializer user={userExists!} />
       <ProjectInitialize project={projects} />
+      <WebisteInitial  userId={user.id} />
       <SidebarComponent />
       <main className="flex-1">
-        <div className="flex items-center gap-2 p-4">
-          <SidebarTrigger />
-          {children}
+        <div className="flex flex-col  gap-2 p-4">
+            {children}
         </div>
       </main>
     </SidebarProvider>

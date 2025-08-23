@@ -3,6 +3,7 @@ import { Project } from "@prisma/client";
 
 const initialState = {
     projects: [] as Project[],
+    selectedProject: null as Project | null,
 }
 
 const projectSlice = createSlice({
@@ -11,10 +12,13 @@ const projectSlice = createSlice({
     reducers: {
         setProjects: (state, action) => {
             state.projects = action.payload
+        },
+        setSelectedProject: (state, action) => {
+            state.selectedProject = action.payload
         }
     }
 })
 
-export const { setProjects } = projectSlice.actions
+export const { setProjects, setSelectedProject } = projectSlice.actions
 
 export default projectSlice.reducer
