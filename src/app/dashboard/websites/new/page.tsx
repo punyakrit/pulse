@@ -11,31 +11,41 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { 
-  FolderOpen, 
+  Globe, 
   Plus, 
   Loader2, 
   ArrowLeft,
-  Globe,
+  ExternalLink,
   Zap,
-  Shield
+  Shield,
+  Clock
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store/store";
-import { createProjectQuery } from "@/lib/actions/query";
+import { createWebsiteQueryFirst } from "@/lib/actions/query";
+import { addWebsite } from "@/lib/reducers/Website";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
 
-function NewProjectPage() {
+function AddWebsitePage() {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const selectedUser = useSelector((state: RootState) => state.user.user);
+  const [url, setUrl] = useState("");
+  const dispatch = useDispatch();
   const router = useRouter();
+  const { selectedProject } = useSelector((state: RootState) => state.project);
 
-  const handleCreateProject = async (e: React.FormEvent) => {
+  const handleCreateWebsite = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedProject?.id) {
+      alert("Please select a project first");
+      return;
+    }
+    
     try {
       setLoading(true);
-      await createProjectQuery(selectedUser?.id!, name);
+      const website = await createWebsiteQueryFirst(selectedProject.id, url);
+      dispatch(addWebsite(website));
       router.push(`/dashboard`);
     } catch (error) {
       console.error(error);
@@ -46,67 +56,80 @@ function NewProjectPage() {
 
   return (
     <div className="container mx-auto p-6 max-w-2xl">
-      <div className="mt-8 mb-4">
-        <h1 className="text-3xl font-bold mb-2">Create New Project</h1>
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Add New Website</h1>
         <p className="text-muted-foreground">
-          Set up a new monitoring project to track your websites and applications
+          Monitor a new website for uptime, performance, and get instant alerts
         </p>
       </div>
 
       <Card className="shadow-lg">
         <CardHeader className="text-center pb-8">
           <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-            <FolderOpen className="w-10 h-10 text-primary-foreground" />
+            <Globe className="w-10 h-10 text-primary-foreground" />
           </div>
           <CardTitle className="text-2xl font-bold mb-4">
-            Project Details
+            Website Details
           </CardTitle>
           <CardDescription className="text-lg max-w-md mx-auto leading-relaxed">
-            Give your project a name and start monitoring your websites with real-time alerts and analytics.
+            Enter the URL of the website you want to monitor and we'll start tracking its performance immediately.
           </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-8">
-          <form onSubmit={handleCreateProject} className="space-y-6">
+          <form onSubmit={handleCreateWebsite} className="space-y-6">
             <div className="space-y-3">
-              <Label className="font-medium text-base">Project Name</Label>
-              <Input
-                placeholder="e.g., My Website, E-commerce Store, API Service"
-                className="h-12 text-lg"
-                required={true}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+              <Label className="font-medium text-base">Website URL</Label>
+              <div className="relative">
+                <Input
+                  placeholder="https://example.com"
+                  className="h-12 text-lg pr-10"
+                  type="url"
+                  required={true}
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                />
+                <ExternalLink className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              </div>
               <p className="text-sm text-muted-foreground">
-                Choose a descriptive name that helps you identify this project
+                Enter the full URL including https://
               </p>
             </div>
+
+            {selectedProject && (
+              <div className="p-4 bg-muted rounded-lg">
+                <Label className="font-medium text-base">Project</Label>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Adding to: <span className="font-medium text-foreground">{selectedProject.name}</span>
+                </p>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
               <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
                 <Zap className="w-5 h-5 text-yellow-500" />
                 <div>
-                  <p className="font-medium text-sm">Real-time Monitoring</p>
+                  <p className="font-medium text-sm">Performance Tracking</p>
                   <p className="text-muted-foreground text-xs">
-                    24/7 uptime tracking
+                    Monitor load times
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
-                <Globe className="w-5 h-5 text-blue-500" />
+                <Clock className="w-5 h-5 text-blue-500" />
                 <div>
-                  <p className="font-medium text-sm">Global Coverage</p>
+                  <p className="font-medium text-sm">Real-time Monitoring</p>
                   <p className="text-muted-foreground text-xs">
-                    Multiple locations
+                    24/7 uptime checks
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
                 <Shield className="w-5 h-5 text-green-500" />
                 <div>
-                  <p className="font-medium text-sm">Instant Alerts</p>
+                  <p className="font-medium text-sm">Smart Alerts</p>
                   <p className="text-muted-foreground text-xs">
-                    Never miss downtime
+                    Instant notifications
                   </p>
                 </div>
               </div>
@@ -115,14 +138,14 @@ function NewProjectPage() {
             <Button
               type="submit"
               className="w-full py-3 text-lg"
-              disabled={loading}
+              disabled={loading || !selectedProject}
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 mr-2 animate-spin" />
               ) : (
                 <Plus className="w-5 h-5 mr-2" />
               )}
-              Create Project
+              Add Website
             </Button>
           </form>
         </CardContent>
@@ -131,4 +154,4 @@ function NewProjectPage() {
   );
 }
 
-export default NewProjectPage;
+export default AddWebsitePage;

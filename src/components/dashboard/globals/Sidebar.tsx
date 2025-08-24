@@ -143,7 +143,7 @@ export default function SidebarComponent() {
                   }`}
                 >
                   <SidebarMenuButton asChild tooltip={project.name}>
-                    <Link href={`/dashboard/projects/${project.id}`}>
+                    <div className="flex items-center w-full">
                       <Globe className="h-6 w-6 text-primary" />
                       <span>{project.name}</span>
                       <div
@@ -155,7 +155,7 @@ export default function SidebarComponent() {
                             : "bg-red-500"
                         }`}
                       />
-                    </Link>
+                    </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
