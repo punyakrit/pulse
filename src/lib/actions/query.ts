@@ -11,6 +11,14 @@ export async function createProjectQuery(userId: string, name: string) {
             userId,
         }
     })
+
+    const settings = await prisma.setting.create({
+        data: {
+            projectId: project.id,
+        }
+    })
+
+    return project; 
 }   
 
 
@@ -49,4 +57,32 @@ export async function createWebsiteQueryFirst(projectId: string, url: string) {
         },
     });
     return website;
+}
+
+export async function getSettingsQuery(projectId: string) {
+    const settings = await prisma.setting.findUnique({
+        where: {
+            projectId: projectId,
+        },
+    });
+    return settings;
+}
+
+export async function updateSettingsQuery(
+    projectId: string, 
+    status: boolean, 
+    interval: number, 
+    notifyType: string
+) {
+    const settings = await prisma.setting.update({
+        where: {
+            projectId: projectId,
+        },
+        data: {
+            status,
+            interval,
+            notifyType,
+        },
+    });
+    return settings;
 }

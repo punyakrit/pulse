@@ -18,7 +18,7 @@ model User {
 model Project {
   id        String     @id @default(uuid())
   name      String
-  user      User       @relation(fields: [userId], references: [id])
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   websites  Website[]
   settings  Setting?
@@ -29,7 +29,7 @@ model Project {
 model Website {
   id        String     @id @default(uuid())
   url       String
-  project   Project    @relation(fields: [projectId], references: [id])
+  project   Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
   checks    Check[]
   alerts    Alert[]
@@ -40,7 +40,7 @@ model Check {
   id           String   @id @default(uuid())
   status       Boolean  // true = up, false = down
   responseTime Int?     // ms, optional
-  website      Website  @relation(fields: [websiteId], references: [id])
+  website      Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
   websiteId    String
   errorMessage String?
   checkedAt    DateTime @default(now())
@@ -49,10 +49,10 @@ model Check {
 model Setting {
   id           String   @id @default(uuid())
   projectId    String   @unique
-  project      Project  @relation(fields: [projectId], references: [id])
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
   status       Boolean  @default(true)
   interval     Int      @default(300)
-  notifyType   String   // e.g. "email", "slack", "sms"
+  notifyType   String   @default("email")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
@@ -60,7 +60,7 @@ model Setting {
 model Alert {
   id         String   @id @default(uuid())
   websiteId  String
-  website    Website  @relation(fields: [websiteId], references: [id])
+  website    Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
   message    String
   createdAt  DateTime @default(now())
   resolvedAt DateTime?
