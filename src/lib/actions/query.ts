@@ -1,6 +1,6 @@
 "use server"
 
-import { prisma } from "@/lib/prisma/db";
+import { prisma } from "../../../lib/db";
 
 
 export async function createProjectQuery(userId: string, name: string) {

@@ -1,7 +1,7 @@
 import { getUser } from "@/lib/actions/User";
 import { redirect } from "next/navigation";
 import React from "react";
-import { prisma } from "@/lib/prisma/db";
+import { prisma } from "../../../lib/db";
 import UserInitializer from "@/customHooks/UserInitializer";
 import NoProject from "@/components/dashboard/globals/NoProject";
 import ProjectInitialize from "@/customHooks/ProjectInitialize";
