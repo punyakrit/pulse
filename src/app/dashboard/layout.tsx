@@ -25,8 +25,10 @@ async function layout({ children }: layoutProps) {
     },
   });
 
+  let currentUser = userExists;
+  
   if (!userExists) {
-    const newUser = await prisma.user.create({
+    currentUser = await prisma.user.create({
       data: {
         id: user.id,
         email: user.email as string,
@@ -44,7 +46,7 @@ async function layout({ children }: layoutProps) {
   if (projects.length === 0) {
     return (
       <>
-        <UserInitializer user={userExists!} />
+        <UserInitializer user={currentUser!} />
         <NoProject />
       </>
     );
@@ -52,7 +54,7 @@ async function layout({ children }: layoutProps) {
 
   return (
     <SidebarProvider>
-      <UserInitializer user={userExists!} />
+      <UserInitializer user={currentUser!} />
       <ProjectInitialize project={projects} />
       <WebisteInitial  userId={user.id} />
       <SidebarComponent />

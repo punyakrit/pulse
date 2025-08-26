@@ -4,11 +4,18 @@ import { prisma } from "../../../lib/db";
 
 
 export async function createProjectQuery(userId: string, name: string) {
+    if (!userId || !name) {
+        throw new Error("User ID and project name are required");
+    }
 
     const project = await prisma.project.create({
         data: {
             name,
-            userId,
+            user: {
+                connect: {
+                    id: userId
+                }
+            }
         }
     })
 

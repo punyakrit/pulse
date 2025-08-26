@@ -23,12 +23,23 @@ function NoProject() {
   const router = useRouter();
   const createProject = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!selectedUser?.id) {
+      console.error("User ID is not available");
+      return;
+    }
+    
+    if (!name.trim()) {
+      console.error("Project name is required");
+      return;
+    }
+    
     try {
       setLoading(true);
-      await createProjectQuery(selectedUser?.id!, name);
+      await createProjectQuery(selectedUser.id, name.trim());
       router.push(`/dashboard`);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to create project:", error);
     } finally {
       setLoading(false);
     }

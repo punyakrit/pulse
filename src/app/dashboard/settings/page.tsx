@@ -98,8 +98,8 @@ function SettingsPage() {
 
   const notificationTypes = [
     { value: "email", label: "Email", icon: Mail, description: "Receive alerts via email" },
-    { value: "sms", label: "SMS", icon: Smartphone, description: "Get text message alerts" },
-    { value: "slack", label: "Slack", icon: MessageSquare, description: "Send to Slack channel" }
+    { value: "sms", label: "SMS", icon: Smartphone, description: "Get text message alerts" , disabled: true},
+    { value: "slack", label: "Slack", icon: MessageSquare, description: "Send to Slack channel" , disabled: true}
   ];
 
   if (loading) {
@@ -226,17 +226,20 @@ function SettingsPage() {
                       formData.notifyType === type.value
                         ? "border-primary bg-primary/5"
                         : "border-border hover:border-primary/50"
-                    }`}
-                    onClick={() => setFormData({ ...formData, notifyType: type.value })}
+                    } ${type.disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+                    onClick={() => type.disabled ? null : setFormData({ ...formData, notifyType: type.value })}
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <type.icon className="w-5 h-5 text-primary" />
                       <span className="font-medium">{type.label}</span>
-                      {formData.notifyType === type.value && (
+                      {formData.notifyType === type.value && !type.disabled && (
                         <CheckCircle className="w-5 h-5 text-primary ml-auto" />
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground">{type.description}</p>
+                    <p className={`text-sm text-muted-foreground ${type.disabled ? "opacity-50" : ""}`}>{type.description}</p>
+                    {type.disabled && (
+                      <p className="text-sm text-muted-foreground">Coming soon</p>
+                    )}
                   </div>
                 ))}
               </div>
