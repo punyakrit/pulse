@@ -29,6 +29,7 @@ import { RootState } from "@/lib/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProject } from "@/lib/reducers/Project";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const navigationItems = [
   {
@@ -89,7 +90,7 @@ export default function SidebarComponent() {
   const { projects } = useSelector((state: RootState) => state.project);
   const { selectedProject } = useSelector((state: RootState) => state.project);
   const dispatch = useDispatch();
-
+  const pathname = usePathname();
   useEffect(() => {
     dispatch(setSelectedProject(projects[0]));
   }, [projects]);
@@ -117,7 +118,7 @@ export default function SidebarComponent() {
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.description}>
-                    <Link href={item.href}>
+                    <Link href={item.href} className={`${pathname === item.href ? "bg-primary/10 rounded-lg" : ""}`}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
