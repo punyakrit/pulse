@@ -25,11 +25,12 @@ import {
   Trash2,
 } from "lucide-react";
 import Link from "next/link";
-import { deleteWebsiteQuery, getChecksQueryLatest, getWebsitesQuery } from "@/lib/actions/query";
+import { deleteWebsiteQuery, getChecksQueryLatest, getWebsitesQuery, getSettingsQuery } from "@/lib/actions/query";
 import { setWebsites, setLoading, removeWebsite as removeWebsiteFromList } from "@/lib/reducers/Website";
 import { useDispatch } from "react-redux";
 import { Website, Check } from "@prisma/client";
 import { setWebsiteChecks } from "@/lib/reducers/Check";
+import { setSettings } from "@/lib/reducers/Settings";
 
 function WebsitesPage() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function WebsitesPage() {
   );
   const { selectedProject } = useSelector((state: RootState) => state.project);
   const { checks } = useSelector((state: RootState) => state.check);
+  const { settings } = useSelector((state: RootState) => state.settings);
   const [refreshing, setRefreshing] = useState(false);
 
   const projectWebsites = selectedProject
@@ -45,12 +47,18 @@ function WebsitesPage() {
     : [];
 
   useEffect(() => {
-    const fetchWebsites = async () => {
+    const fetchData = async () => {
       if (selectedProject?.id) {
         try {
           dispatch(setLoading(true));
-          const projectWebsites = await getWebsitesQuery(selectedProject.id);
+          
+          const [projectWebsites, projectSettings] = await Promise.all([
+            getWebsitesQuery(selectedProject.id),
+            getSettingsQuery(selectedProject.id)
+          ]);
+          
           dispatch(setWebsites(projectWebsites));
+          dispatch(setSettings(projectSettings));
 
           for (const website of projectWebsites) {
             const websiteChecks = await getChecksQueryLatest(website.id);
@@ -59,7 +67,7 @@ function WebsitesPage() {
             );
           }
         } catch (error) {
-          console.error("Error fetching websites:", error);
+          console.error("Error fetching data:", error);
           dispatch(setWebsites([]));
         } finally {
           dispatch(setLoading(false));
@@ -67,15 +75,20 @@ function WebsitesPage() {
       }
     };
 
-    fetchWebsites();
+    fetchData();
   }, [selectedProject?.id, dispatch]);
 
   const handleRefresh = async () => {
     if (selectedProject?.id) {
       setRefreshing(true);
       try {
-        const projectWebsites = await getWebsitesQuery(selectedProject.id);
+        const [projectWebsites, projectSettings] = await Promise.all([
+          getWebsitesQuery(selectedProject.id),
+          getSettingsQuery(selectedProject.id)
+        ]);
+        
         dispatch(setWebsites(projectWebsites));
+        dispatch(setSettings(projectSettings));
 
         for (const website of projectWebsites) {
           const websiteChecks = await getChecksQueryLatest(website.id);
@@ -84,7 +97,7 @@ function WebsitesPage() {
           );
         }
       } catch (error) {
-        console.error("Error refreshing websites:", error);
+        console.error("Error refreshing data:", error);
       } finally {
         setRefreshing(false);
       }
@@ -92,6 +105,8 @@ function WebsitesPage() {
   };
 
   const getStatusVariant = (website: Website) => {
+    if (!settings?.status) return "secondary" as const;
+    
     const websiteChecks = checks[website.id] || [];
     const latestCheck = websiteChecks[0];
 
@@ -100,6 +115,8 @@ function WebsitesPage() {
   };
 
   const getStatusIcon = (website: Website) => {
+    if (!settings?.status) return <Clock className="w-4 h-4" />;
+    
     const websiteChecks = checks[website.id] || [];
     const latestCheck = websiteChecks[0];
 
@@ -112,6 +129,8 @@ function WebsitesPage() {
   };
 
   const getStatusText = (website: Website) => {
+    if (!settings?.status) return "Monitoring Paused";
+    
     const websiteChecks = checks[website.id] || [];
     const latestCheck = websiteChecks[0];
 

@@ -117,3 +117,13 @@ export async function deleteWebsiteQuery(websiteId: string) {
     });
     return website;
 }
+
+
+export async function getAlertsQueryWebsite(websiteId: string) {
+    const alerts = await prisma.alert.findMany({
+        where: {
+            websiteId: websiteId,
+        },
+    });
+    return alerts;
+}
