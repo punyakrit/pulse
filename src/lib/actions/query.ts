@@ -124,6 +124,31 @@ export async function getAlertsQueryWebsite(websiteId: string) {
         where: {
             websiteId: websiteId,
         },
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+    return alerts;
+}
+
+export async function getAlertsQueryProject(projectId: string) {
+    const alerts = await prisma.alert.findMany({
+        where: {
+            website: {
+                projectId: projectId,
+            },
+        },
+        include: {
+            website: {
+                select: {
+                    id: true,
+                    url: true,
+                },
+            },
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
     });
     return alerts;
 }
