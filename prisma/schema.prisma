@@ -3,65 +3,102 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id        String    @id 
+  id        String    @id
   email     String    @unique
   name      String?
-  projects  Project[]
   createdAt DateTime  @default(now())
+  projects  Project[]
 }
 
 model Project {
-  id        String     @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
-  websites  Website[]
+  createdAt DateTime  @default(now())
+  status    String    @default("offline")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   settings  Setting?
-  status    String     @default("offline")
-  createdAt DateTime   @default(now())
+  websites  Website[]
 }
 
 model Website {
-  id        String     @id @default(uuid())
-  url       String
-  project   Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId String
-  checks    Check[]
-  alerts    Alert[]
-  createdAt DateTime   @default(now())
+  id                String              @id @default(uuid())
+  url               String
+  projectId         String
+  createdAt         DateTime            @default(now())
+  alerts            Alert[]
+  checks            Check[]
+  PerformanceMetric PerformanceMetric[]
+  UptimeLog         UptimeLog[]
+  project           Project             @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Check {
   id           String   @id @default(uuid())
-  status       Boolean  // true = up, false = down
-  responseTime Int?     // ms, optional
-  website      Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+  status       Boolean
+  responseTime Int?
+  statusCode   Int?
   websiteId    String
   errorMessage String?
+  errorType    String?
   checkedAt    DateTime @default(now())
+  headers      Json?
+  contentSize  Int?
+  sslValid     Boolean?
+  dnsTime      Int?
+  connectTime  Int?
+  transferTime Int?
+  website      Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
 }
 
 model Setting {
-  id           String   @id @default(uuid())
-  projectId    String   @unique
-  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  status       Boolean  @default(true)
-  interval     Int      @default(300)
-  notifyType   String   @default("email")
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id         String   @id @default(uuid())
+  projectId  String   @unique
+  status     Boolean  @default(true)
+  interval   Int      @default(300)
+  notifyType String   @default("email")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Alert {
-  id         String   @id @default(uuid())
+  id         String    @id @default(uuid())
   websiteId  String
-  website    Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
   message    String
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
   resolvedAt DateTime?
+  website    Website   @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+}
+
+model PerformanceMetric {
+  id           String   @id @default(uuid())
+  websiteId    String
+  timestamp    DateTime @default(now())
+  responseTime Int
+  statusCode   Int
+  contentSize  Int?
+  sslValid     Boolean?
+  dnsTime      Int?
+  connectTime  Int?
+  transferTime Int?
+  Website      Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
+}
+
+model UptimeLog {
+  id              String   @id @default(uuid())
+  websiteId       String
+  date            DateTime
+  uptime          Float
+  downtime        Float
+  checks          Int
+  failures        Int
+  avgResponseTime Float
+  Website         Website  @relation(fields: [websiteId], references: [id], onDelete: Cascade)
 }
