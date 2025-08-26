@@ -39,12 +39,6 @@ const navigationItems = [
     description: "Overview of all projects & websites",
   },
   {
-    title: "Projects",
-    icon: FolderOpen,
-    href: "/dashboard/projects",
-    description: "Manage your projects",
-  },
-  {
     title: "Websites",
     icon: Globe,
     href: "/dashboard/websites",
