@@ -93,3 +93,27 @@ export async function updateSettingsQuery(
     });
     return settings;
 }
+
+
+export async function getChecksQueryLatest(websiteId: string) {
+    const checks = await prisma.check.findMany({
+        where: {
+            websiteId: websiteId,
+        },
+        orderBy: {
+            checkedAt: "desc",
+        },
+        take: 2,
+    });
+    return checks;
+}
+
+
+export async function deleteWebsiteQuery(websiteId: string) {
+    const website = await prisma.website.delete({
+        where: {
+            id: websiteId,
+        },
+    });
+    return website;
+}

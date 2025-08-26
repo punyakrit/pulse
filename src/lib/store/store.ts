@@ -3,6 +3,7 @@ import userReducer from "../reducers/User";
 import projectReducer from "../reducers/Project";
 import websiteReducer from "../reducers/Website";
 import settingsReducer from "../reducers/Settings";
+import checkReducer from "../reducers/Check";
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         project: projectReducer,
         website: websiteReducer,
         settings: settingsReducer,
+        check: checkReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

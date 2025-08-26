@@ -17,11 +17,14 @@ const websitesSlice = createSlice({
         addWebsite: (state, action) => {
             state.websites.push(action.payload);
         },
+        removeWebsite: (state, action) => {
+            state.websites = state.websites.filter(website => website.id !== action.payload.websiteId);
+        },
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
     }
 })
 
-export const { setWebsites, addWebsite, setLoading } = websitesSlice.actions;
+export const { setWebsites, addWebsite, removeWebsite, setLoading } = websitesSlice.actions;
 export default websitesSlice.reducer;
