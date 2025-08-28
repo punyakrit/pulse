@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { Activity, Menu, X } from "lucide-react";
+import { Activity, Menu, X, Zap } from "lucide-react";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 const navItems = [
@@ -32,9 +32,9 @@ function NavBar() {
       <div className="flex justify-between items-center border border-white/15 w-full max-w-6xl rounded-full px-6 py-2 relative bg-black/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-bold">
-            <Link href="/" className="flex items-center gap-2 text-lime-400">
-              <Activity className="w-6 h-6 text-white" />
-              <span className="">Pulse</span>
+            <Link href="/" className="flex items-center gap-2 text-white">
+            <Zap className="h-6 w-6 text-primary" />
+            <span className="">Pulse</span>
             </Link>
           </h1>
         </div>
