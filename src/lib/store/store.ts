@@ -5,6 +5,7 @@ import websiteReducer from "../reducers/Website";
 import settingsReducer from "../reducers/Settings";
 import checkReducer from "../reducers/Check";
 import alertsReducer from "../reducers/alerts";
+import analyticsReducer from "../reducers/analytics";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         settings: settingsReducer,
         check: checkReducer,
         alerts: alertsReducer,
+        analytics: analyticsReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

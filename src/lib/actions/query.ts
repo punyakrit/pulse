@@ -152,3 +152,21 @@ export async function getAlertsQueryProject(projectId: string) {
     });
     return alerts;
 }
+
+export async function getUptimeLogsQuery(websiteId: string, days: number = 30) {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+    
+    const logs = await prisma.uptimeLog.findMany({
+        where: {
+            websiteId: websiteId,
+            date: {
+                gte: startDate,
+            },
+        },
+        orderBy: {
+            date: "asc",
+        },
+    });
+    return logs;
+}

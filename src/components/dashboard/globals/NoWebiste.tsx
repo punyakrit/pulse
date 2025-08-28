@@ -11,7 +11,6 @@ import {
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Monitor, Plus, Globe, Zap, Shield, Loader2, ExternalLink } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { createWebsiteQueryFirst } from "@/lib/actions/query";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store/store";
@@ -20,15 +19,19 @@ import { addWebsite } from "@/lib/reducers/Website";
 function NoWebiste() {
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
-  const router = useRouter();
   const dispatch = useDispatch();
   const { selectedProject } = useSelector((state: RootState) => state.project);
 
   const handleCreateWebsite = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedProject?.id) {
+      console.error("No project selected");
+      return;
+    }
+    
     try {
       setLoading(true);
-      const website = await createWebsiteQueryFirst(selectedProject?.id!, url);
+      const website = await createWebsiteQueryFirst(selectedProject.id, url);
       console.log("Creating website:", url);
       dispatch(addWebsite(website));
     } catch (error) {
