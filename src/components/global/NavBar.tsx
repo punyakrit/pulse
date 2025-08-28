@@ -28,8 +28,8 @@ function NavBar() {
   };
 
   return (
-    <div className="flex justify-center container mx-auto max-w-4xl z-50">
-      <div className="flex justify-between items-center border border-white/15 w-full max-w-6xl my-4 rounded-full px-6 py-2 relative">
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center container mx-auto max-w-4xl my-4">
+      <div className="flex justify-between items-center border border-white/15 w-full max-w-6xl rounded-full px-6 py-2 relative bg-black/80 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-bold">
             <Link href="/" className="flex items-center gap-2 text-lime-400">
@@ -73,7 +73,7 @@ function NavBar() {
           </button>
         </div>
 
-        <div className={`md:hidden absolute z-20 backdrop-blur-2xl  top-full left-0 right-0 mt-2 bg-black/95 border border-white/30 rounded-lg py-4 px-6 transition-all duration-300 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <div className={`md:hidden absolute z-20 backdrop-blur-2xl top-full left-0 right-0 mt-2 bg-black/95 border border-white/30 rounded-lg py-4 px-6 transition-all duration-300 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
           <nav className="flex flex-col gap-4">
             {navItems.map((item) => (
               <Link
@@ -88,15 +88,14 @@ function NavBar() {
             <div className="flex flex-col gap-2 pt-4 border-t border-white/15">
               <Button variant="outline" className="text-sm rounded-full w-full">
                 <LoginLink>
-
-                Login
+                  Login
                 </LoginLink>
               </Button>
               <Button className="text-sm rounded-full w-full">
                 <RegisterLink>
                   Sign Up
-                  </RegisterLink>
-                  </Button>
+                </RegisterLink>
+              </Button>
             </div>
           </nav>
         </div>

@@ -6,19 +6,11 @@ import Footer from '@/components/landing/Footer'
 
 function page() {
   return (
-    <div>
-      <section>
-        <Hero />
-      </section>
-      <section>
-        <Features />
-      </section>
-      <section>
-        <StartToday />
-      </section>
-      <footer>
-        <Footer />
-      </footer>
+    <div className="min-h-screen">
+      <Hero />
+      <Features />
+      <StartToday />
+      <Footer />
     </div>
   )
 }

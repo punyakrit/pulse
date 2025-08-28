@@ -14,9 +14,11 @@ async function layout({children}: layoutProps) {
     redirect('/dashboard')
   }
   return (
-    <div className='flex flex-col '>
+    <div className='min-h-screen bg-black'>
         <NavBar />
-        {children}
+        <main className='pt-0'>
+            {children}
+        </main>
     </div>
   )
 }
