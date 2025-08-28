@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { ArrowRight, CheckCircle, Play, Star, Zap, Shield } from "lucide-react";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { VideoModal } from "../ui/video-modal";
 import Link from "next/link";
 
 function Hero() {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-16">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-black"></div>
@@ -43,7 +47,11 @@ function Hero() {
               </RegisterLink>
             </Button>
             
-            <Button variant="outline" className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
+              onClick={() => setIsVideoModalOpen(true)}
+            >
               <Play className="w-5 h-5" />
               Watch Demo
             </Button>
@@ -80,6 +88,12 @@ function Hero() {
           </div>
         </div>
       </div>
+      
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoSrc="/pulse.mp4"
+      />
     </div>
   );
 }
