@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pulse - Website Monitoring & Uptime Tracking
+
+Pulse is a comprehensive website monitoring platform that helps you track your websites' uptime, performance, and availability 24/7. Get instant alerts when downtime occurs and keep your business running smoothly with detailed analytics.
+
+## Features
+
+- **24/7 Website Monitoring** - Continuous monitoring 
+- **Instant Downtime Alerts** - Get notified via email, SMS, or Slack when issues occur
+- **Global Monitoring** - Checks from multiple worldwide locations to avoid false alarms
+- **Detailed Analytics** - Track uptime percentages, response times, and historical performance
+- **Multi-Project Support** - Organize and monitor multiple websites across different projects
+- **Performance Metrics** - Monitor response times, SSL validity, DNS performance, and more
+- **Uptime Logging** - Comprehensive logs of uptime, downtime, and performance metrics
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS 4, Radix UI components
+- **State Management**: Redux Toolkit with React Redux
+- **Authentication**: Kinde Auth
+- **Database**: PostgreSQL with Prisma ORM
+- **Charts**: Recharts for analytics visualization
+- **Icons**: Lucide React
+- **Theme**: Next-themes for dark/light mode support
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 18+ 
+- PostgreSQL database
+- Kinde Auth account (for authentication)
+
+
+## Project Structure
+
+```
+pulse/
+├── src/
+│   ├── app/                    # Next.js app router
+│   │   ├── (landing)/         # Landing page routes
+│   │   ├── api/               # API routes
+│   │   └── dashboard/         # Dashboard routes
+│   ├── components/            # React components
+│   │   ├── dashboard/         # Dashboard-specific components
+│   │   ├── global/            # Global components
+│   │   ├── landing/           # Landing page components
+│   │   └── ui/                # Reusable UI components
+│   ├── customHooks/           # Custom React hooks
+│   ├── hooks/                 # Utility hooks
+│   └── lib/                   # Utilities and configurations
+│       ├── actions/           # Database actions
+│       ├── providers/         # Context providers
+│       ├── reducers/          # Redux reducers
+│       └── store/             # Redux store configuration
+├── prisma/                    # Database schema and migrations
+└── public/                    # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Database Schema
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application uses PostgreSQL with the following main entities:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **User**: Authentication and user management
+- **Project**: Groups of websites to monitor
+- **Website**: Individual websites being monitored
+- **Check**: Individual monitoring checks with performance data
+- **Alert**: Downtime and performance alerts
+- **PerformanceMetric**: Detailed performance measurements
+- **UptimeLog**: Daily uptime statistics
+- **Setting**: Project-specific monitoring settings
