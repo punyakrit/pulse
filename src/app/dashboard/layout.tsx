@@ -8,6 +8,7 @@ import ProjectInitialize from "@/customHooks/ProjectInitialize";
 import SidebarComponent from "@/components/dashboard/globals/Sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import WebisteInitial from "@/customHooks/WebisteInitial";
+import MonitoringBanner from "@/components/dashboard/globals/MonitoringBanner";
 
 interface layoutProps {
   children: React.ReactNode;
@@ -60,7 +61,8 @@ async function layout({ children }: layoutProps) {
       <SidebarComponent />
       <main className="flex-1">
         <div className="flex flex-col">
-            {children}
+          <MonitoringBanner />
+          {children}
         </div>
       </main>
     </SidebarProvider>

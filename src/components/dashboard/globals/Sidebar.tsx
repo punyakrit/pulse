@@ -30,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProject } from "@/lib/reducers/Project";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 
 const navigationItems = [
   {
@@ -112,7 +113,12 @@ export default function SidebarComponent() {
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.description}>
-                    <Link href={item.href} className={`${pathname === item.href ? "bg-primary/10 rounded-lg" : ""}`}>
+                    <Link
+                      href={item.href}
+                      className={`${
+                        pathname === item.href ? "bg-primary/10 rounded-lg" : ""
+                      }`}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
@@ -134,7 +140,9 @@ export default function SidebarComponent() {
                   key={project.name}
                   onClick={() => dispatch(setSelectedProject(project))}
                   className={`${
-                    project.id === selectedProject?.id ? "bg-primary/10 rounded-lg" : ""
+                    project.id === selectedProject?.id
+                      ? "bg-primary/10 rounded-lg"
+                      : ""
                   }`}
                 >
                   <SidebarMenuButton asChild tooltip={project.name}>
@@ -183,13 +191,18 @@ export default function SidebarComponent() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <button className="w-full">
+              <button className="w-full flex items-center gap-2">
                 <Avatar className="h-6 w-6">
                   <AvatarImage src="/api/avatar" alt="User" />
                   <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <span>{user?.name}</span>
-                <LogOut className="ml-auto h-4 w-4" />
+                <div className="ml-auto ">
+
+                <LogoutLink className="">
+                  <LogOut className="h-4 w-4"/>
+                </LogoutLink>
+                </div>
               </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
