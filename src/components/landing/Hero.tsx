@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { ArrowRight, CheckCircle, Play, Star, Zap, Shield } from "lucide-react";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
@@ -15,77 +16,165 @@ function Hero() {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center justify-center text-center gap-8">
-          <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 mb-4 mt-16">
+          <motion.div 
+            className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10 mb-4 mt-16"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
             <span className="text-white/80 text-sm">Trusted by 10,000+ websites worldwide</span>
-          </div>
+          </motion.div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold max-w-6xl leading-tight">
-            <span className="text-white">
+          <motion.h1 
+            className="text-5xl md:text-7xl lg:text-8xl font-bold max-w-6xl leading-tight"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.span 
+              className="text-white"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               Never miss a
-            </span>
+            </motion.span>
             <br />
-            <span className="text-white">
+            <motion.span 
+              className="text-white"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
               website outage
-            </span>
+            </motion.span>
             <br />
-            <span className="text-white">
+            <motion.span 
+              className="text-white"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
               again
-            </span>
-          </h1>
+            </motion.span>
+          </motion.h1>
           
-          <p className="text-lg md:text-xl text-white/70 max-w-4xl leading-relaxed">
+          <motion.p 
+            className="text-lg md:text-xl text-white/70 max-w-4xl leading-relaxed"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+          >
             Monitor your websites 24/7 from multiple global locations. Get instant alerts when downtime occurs 
             and keep your business running smoothly with detailed analytics and performance insights.
-          </p>
+          </motion.p>
           
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
-            <Button className="bg-white text-black rounded-lg text-lg font-semibold px-8 py-4 hover:bg-gray-100 transition-all duration-300">
-              <RegisterLink className="flex items-center gap-2">
-                Get Started Free
-                <ArrowRight className="w-5 h-5" />
-              </RegisterLink>
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
-              onClick={() => setIsVideoModalOpen(true)}
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center gap-4 mt-8"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Play className="w-5 h-5" />
-              Watch Demo
-            </Button>
-          </div>
+              <Button className="bg-white text-black rounded-lg text-lg font-semibold px-8 py-4 hover:bg-gray-100 transition-all duration-300">
+                <RegisterLink className="flex items-center gap-2">
+                  Get Started Free
+                  <ArrowRight className="w-5 h-5" />
+                </RegisterLink>
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                variant="outline" 
+                className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
+                onClick={() => setIsVideoModalOpen(true)}
+              >
+                <Play className="w-5 h-5" />
+                Watch Demo
+              </Button>
+            </motion.div>
+          </motion.div>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
-            <div className="flex items-center gap-2">
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+          >
+            <motion.div 
+              className="flex items-center gap-2"
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.0 }}
+            >
               <CheckCircle className="w-5 h-5 text-white" />
               <span className="text-white/70">No credit card required</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </motion.div>
+            <motion.div 
+              className="flex items-center gap-2"
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.1 }}
+            >
               <Zap className="w-5 h-5 text-white" />
               <span className="text-white/70">Setup in 2 minutes</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </motion.div>
+            <motion.div 
+              className="flex items-center gap-2"
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+            >
               <Shield className="w-5 h-5 text-white" />
               <span className="text-white/70">99.9% uptime guarantee</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
           
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl">
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+          <motion.div 
+            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
+          >
+            <motion.div 
+              className="bg-white/5 rounded-xl p-6 border border-white/10"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.4 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
               <div className="text-3xl font-bold text-white mb-2">99.9%</div>
               <div className="text-white/70">Average Uptime</div>
-            </div>
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+            </motion.div>
+            <motion.div 
+              className="bg-white/5 rounded-xl p-6 border border-white/10"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.5 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
               <div className="text-3xl font-bold text-white mb-2">&lt;30s</div>
               <div className="text-white/70">Alert Response Time</div>
-            </div>
-            <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+            </motion.div>
+            <motion.div 
+              className="bg-white/5 rounded-xl p-6 border border-white/10"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.6 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+            >
               <div className="text-3xl font-bold text-white mb-2">20+</div>
               <div className="text-white/70">Global Locations</div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
       
