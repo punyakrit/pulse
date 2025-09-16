@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Project } from "@prisma/client";
+import { setStoredProjectId, removeStoredProjectId } from "../utils/localStorage";
 
 const initialState = {
     projects: [] as Project[],
@@ -15,6 +16,11 @@ const projectSlice = createSlice({
         },
         setSelectedProject: (state, action) => {
             state.selectedProject = action.payload
+            if (action.payload?.id) {
+                setStoredProjectId(action.payload.id)
+            } else {
+                removeStoredProjectId()
+            }
         }
     }
 })

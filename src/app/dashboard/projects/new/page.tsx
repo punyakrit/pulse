@@ -20,22 +20,25 @@ import {
   Shield
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/lib/store/store";
 import { createProjectQuery } from "@/lib/actions/query";
+import { setSelectedProject } from "@/lib/reducers/Project";
 import Link from "next/link";
 
 function NewProjectPage() {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const selectedUser = useSelector((state: RootState) => state.user.user);
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleCreateProject = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
-      await createProjectQuery(selectedUser?.id!, name);
+      const newProject = await createProjectQuery(selectedUser?.id!, name);
+      dispatch(setSelectedProject(newProject));
       router.push(`/dashboard`);
     } catch (error) {
       console.error(error);

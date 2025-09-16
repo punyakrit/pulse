@@ -12,14 +12,16 @@ import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import { Globe, Plus, Zap, Shield, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/lib/store/store";
 import { createProjectQuery } from "@/lib/actions/query";
+import { setSelectedProject } from "@/lib/reducers/Project";
 
 function NoProject() {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const selectedUser = useSelector((state: RootState) => state.user.user);
+  const dispatch = useDispatch();
   const router = useRouter();
   const createProject = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +38,8 @@ function NoProject() {
     
     try {
       setLoading(true);
-      await createProjectQuery(selectedUser.id, name.trim());
+      const newProject = await createProjectQuery(selectedUser.id, name.trim());
+      dispatch(setSelectedProject(newProject));
       router.push(`/dashboard`);
     } catch (error) {
       console.error("Failed to create project:", error);
