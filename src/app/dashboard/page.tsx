@@ -202,23 +202,23 @@ function page() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="container mx-auto p-4 sm:p-6 space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight md:hidden">Dashboard</h1>
+          <p className="text-muted-foreground mt-1 text-sm sm:text-base">
             Monitoring {dashboardStats.totalWebsites} website{dashboardStats.totalWebsites !== 1 ? 's' : ''} in {selectedProject.name}
           </p>
         </div>
         <Link href="/dashboard/websites/new">
-          <Button>
+          <Button className="w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
             Add Website
           </Button>
         </Link>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Websites</CardTitle>
@@ -272,7 +272,7 @@ function page() {
         </Card>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -285,17 +285,17 @@ function page() {
           </CardHeader>
           <CardContent className="space-y-4">
             {projectWebsites.slice(0, 3).map((website, index) => (
-              <div key={website.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <div key={website.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-muted/50 rounded-lg gap-2 sm:gap-0">
                 <div className="flex items-center gap-3">
                   <div className={`w-2 h-2 rounded-full ${getStatusColor(website)}`}></div>
                   <div>
-                    <p className="font-medium text-sm">{website.url}</p>
+                    <p className="font-medium text-sm truncate">{website.url}</p>
                     <p className="text-xs text-muted-foreground">
                       Last checked 2 minutes ago
                     </p>
                   </div>
                 </div>
-                <Badge variant="secondary" className="text-xs">
+                <Badge variant="secondary" className="text-xs w-fit">
                   {getStatusText(website)}
                 </Badge>
               </div>
@@ -376,13 +376,13 @@ function page() {
         <CardContent>
           <div className="grid gap-4">
             {projectWebsites.map((website) => (
-              <div key={website.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+              <div key={website.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors gap-3 sm:gap-0">
                 <div className="flex items-center gap-4">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Globe className="w-5 h-5 text-primary" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold">{website.url}</h3>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold truncate">{website.url}</h3>
                     <p className="text-sm text-muted-foreground">
                       Added on {new Date(website.createdAt).toLocaleDateString()}
                     </p>

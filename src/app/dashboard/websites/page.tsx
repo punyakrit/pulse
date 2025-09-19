@@ -172,21 +172,22 @@ function WebsitesPage() {
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <div className="flex items-center justify-between mb-8">
+    <div className="container mx-auto p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Websites</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">Websites</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Monitoring {projectWebsites.length} website
             {projectWebsites.length !== 1 ? "s" : ""} in {selectedProject.name}
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <Button
             variant="outline"
             size="sm"
             onClick={handleRefresh}
             disabled={refreshing}
+            className="w-full sm:w-auto"
           >
             {refreshing ? (
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -196,7 +197,7 @@ function WebsitesPage() {
             Refresh
           </Button>
           <Link href="/dashboard/websites/new">
-            <Button size="sm">
+            <Button size="sm" className="w-full sm:w-auto">
               <Plus className="w-4 h-4 mr-2" />
               Add Website
             </Button>
@@ -228,13 +229,13 @@ function WebsitesPage() {
               className="hover:shadow-md transition-shadow"
             >
               <CardHeader>
-                <div className="flex items-start justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-lg">
                       <Globe className="w-5 h-5 text-primary" />
                     </div>
-                    <div>
-                      <CardTitle className="text-lg">{website.url}</CardTitle>
+                    <div className="min-w-0 flex-1">
+                      <CardTitle className="text-lg truncate">{website.url}</CardTitle>
                       <CardDescription>
                         Added on{" "}
                         {new Date(website.createdAt).toLocaleDateString()}
@@ -250,7 +251,7 @@ function WebsitesPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Clock className="w-4 h-4" />
                     <span>
@@ -288,15 +289,15 @@ function WebsitesPage() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <Link href={`${website.url}`} target="_blank">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Visit
                     </Button>
                   </Link>
                   <Link href={`/dashboard/settings`}>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">
                       <Settings className="w-4 h-4 mr-2" />
                       Settings
                     </Button>
@@ -304,7 +305,7 @@ function WebsitesPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-destructive hover:text-destructive"
+                    className="text-destructive hover:text-destructive w-full sm:w-auto"
                     onClick={() => handleRemoveWebsite(website.id)}
                   >
                     <Trash2 className="w-4 h-4 mr-2" />

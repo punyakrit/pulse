@@ -69,7 +69,7 @@ function Features() {
             <span className="text-white/80 text-sm">Powerful Features</span>
           </motion.div>
           <motion.h2 
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -86,7 +86,7 @@ function Features() {
             </motion.span>
           </motion.h2>
           <motion.p 
-            className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -97,7 +97,7 @@ function Features() {
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16 sm:mb-20 px-4 sm:px-0"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -105,19 +105,19 @@ function Features() {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="group bg-white/5 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="group bg-white/5 rounded-xl p-4 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <motion.div 
-                className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-white/20 transition-colors duration-300"
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-lg flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-white/20 transition-colors duration-300"
                 whileHover={{ rotate: 5 }}
               >
                 <feature.icon className="w-6 h-6 text-white" />
               </motion.div>
-              <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-white transition-colors duration-300">
+              <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3 group-hover:text-white transition-colors duration-300">
                 {feature.title}
               </h3>
               <p className="text-white/70 leading-relaxed text-sm">
@@ -134,11 +134,11 @@ function Features() {
           transition={{ duration: 0.6, delay: 1.4 }}
         >
           <motion.div 
-            className="bg-white/5 rounded-2xl p-8 border border-white/10"
+            className="bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/10 mx-4 sm:mx-0"
             whileHover={{ scale: 1.02 }}
           >
             <motion.h3 
-              className="text-3xl font-bold text-white mb-4"
+              className="text-2xl sm:text-3xl font-bold text-white mb-4"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.5 }}
@@ -146,7 +146,7 @@ function Features() {
               Ready to get started?
             </motion.h3>
             <motion.p 
-              className="text-white/70 mb-6 max-w-2xl mx-auto"
+              className="text-white/70 mb-6 max-w-2xl mx-auto text-sm sm:text-base px-4 sm:px-0"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.6 }}
@@ -154,7 +154,7 @@ function Features() {
               Join thousands of developers and businesses who trust Pulse to keep their websites online.
             </motion.p>
             <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4 sm:px-0"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.7 }}
@@ -163,7 +163,7 @@ function Features() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="bg-white text-black rounded-lg text-lg font-semibold px-8 py-4 hover:bg-gray-100 transition-all duration-300">
+                <Button className="bg-white text-black rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-gray-100 transition-all duration-300 w-full sm:w-auto">
                   <RegisterLink className="flex items-center gap-2">
                     Start Free Trial
                     <Zap className="w-5 h-5" />
@@ -174,7 +174,7 @@ function Features() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="outline" className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300">
+                <Button variant="outline" className="border-white/20 text-white rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-white/10 transition-all duration-300 w-full sm:w-auto">
                   <Link href="/features" className="flex items-center gap-2">
                     View All Features
                   </Link>

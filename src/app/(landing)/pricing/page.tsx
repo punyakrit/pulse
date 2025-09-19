@@ -69,23 +69,23 @@ function PricingPage() {
             <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
             <span className="text-white/80 text-sm">Simple, transparent pricing</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6">
             Choose the right plan
             <br />
             <span className="text-white">
               for your needs
             </span>
           </h1>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto px-4 sm:px-0">
             Start free and scale as you grow. All plans include our core monitoring features with no hidden fees.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20 px-4 sm:px-0">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative bg-white/5 rounded-2xl p-8 border ${
+              className={`relative bg-white/5 rounded-2xl p-6 sm:p-8 border ${
                 plan.popular 
                   ? 'border-white/30 bg-white/10' 
                   : 'border-white/10'
@@ -100,9 +100,9 @@ function PricingPage() {
               )}
               
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{plan.name}</h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
+                  <span className="text-3xl sm:text-4xl font-bold text-white">{plan.price}</span>
                   <span className="text-white/60 ml-2">{plan.period}</span>
                 </div>
                 <p className="text-white/70 text-sm">{plan.description}</p>
@@ -118,7 +118,7 @@ function PricingPage() {
               </ul>
 
               <Button 
-                className={`w-full rounded-lg font-semibold py-3 transition-all duration-300 ${
+                className={`w-full rounded-lg font-semibold py-3 transition-all duration-300 text-sm sm:text-base ${
                   plan.popular
                     ? 'bg-white text-black hover:bg-gray-100'
                     : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
@@ -133,22 +133,22 @@ function PricingPage() {
           ))}
         </div>
 
-        <div className="text-center">
-          <div className="bg-white/5 rounded-2xl p-8 border border-white/10">
-            <h2 className="text-3xl font-bold text-white mb-4">
+        <div className="text-center px-4 sm:px-0">
+          <div className="bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
               Need a custom plan?
             </h2>
-            <p className="text-white/70 mb-6 max-w-2xl mx-auto">
+            <p className="text-white/70 mb-6 max-w-2xl mx-auto text-sm sm:text-base">
               We offer custom enterprise plans for large organizations with specific requirements. 
               Contact our sales team to discuss your needs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="outline" className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300">
+              <Button variant="outline" className="border-white/20 text-white rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-white/10 transition-all duration-300 w-full sm:w-auto">
                 <Link href="/contact" className="flex items-center gap-2">
                   Contact Sales
                 </Link>
               </Button>
-              <Button className="bg-white text-black rounded-lg text-lg font-semibold px-8 py-4 hover:bg-gray-100 transition-all duration-300">
+              <Button className="bg-white text-black rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-gray-100 transition-all duration-300 w-full sm:w-auto">
                 <RegisterLink className="flex items-center gap-2">
                   Start Free Trial
                 </RegisterLink>

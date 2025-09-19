@@ -7,9 +7,9 @@ import { Activity, Github, Twitter, Linkedin, Mail } from "lucide-react";
 function Footer() {
   return (
     <footer className="bg-black border-t border-white/10">
-      <div className="container mx-auto max-w-7xl px-4 py-16">
+      <div className="container mx-auto max-w-7xl px-4 py-12 sm:py-16">
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8 mb-6 sm:mb-8"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -24,12 +24,12 @@ function Footer() {
               whileHover={{ scale: 1.05 }}
             >
               <Link href="/" className="flex items-center gap-2 text-white mb-4">
-                <Activity className="w-8 h-8" />
-                <span className="text-2xl font-bold">Pulse</span>
+                <Activity className="w-6 h-6 sm:w-8 sm:h-8" />
+                <span className="text-xl sm:text-2xl font-bold">Pulse</span>
               </Link>
             </motion.div>
             <motion.p 
-              className="text-white/70  max-w-md"
+              className="text-white/70 max-w-md text-sm sm:text-base"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -54,7 +54,7 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <motion.div 
-              className="text-white/60 text-sm"
+              className="text-white/60 text-xs sm:text-sm"
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -62,7 +62,7 @@ function Footer() {
               © 2025 Pulse. All rights reserved.
             </motion.div>
             <motion.div 
-              className="flex items-center gap-6 text-sm text-white/60"
+              className="flex items-center gap-6 text-xs sm:text-sm text-white/60"
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}

@@ -59,10 +59,18 @@ async function layout({ children }: layoutProps) {
       <ProjectInitialize project={projects} />
       <WebisteInitial  userId={user.id} />
       <SidebarComponent />
-      <main className="flex-1">
-        <div className="flex flex-col">
-          <MonitoringBanner />
-          {children}
+      <main className="flex-1 min-h-screen">
+        <div className="flex flex-col h-full">
+          <div className="flex items-center gap-4 p-4 border-b bg-background">
+            <SidebarTrigger className="md:hidden hover:bg-accent hover:text-accent-foreground" />
+            <div className="hidden md:block">
+              <h1 className="text-2xl font-bold">Dashboard</h1>
+            </div>
+          </div>
+          <div className="flex-1 overflow-auto">
+            <MonitoringBanner />
+            {children}
+          </div>
         </div>
       </main>
     </SidebarProvider>

@@ -52,33 +52,33 @@ function NoProject() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         <Card className="shadow-lg">
-          <CardHeader className="text-center pb-8">
-            <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-              <Globe className="w-10 h-10 text-primary-foreground" />
+          <CardHeader className="text-center pb-6 sm:pb-8">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Globe className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground" />
             </div>
-            <CardTitle className="text-3xl font-bold mb-4">
+            <CardTitle className="text-2xl sm:text-3xl font-bold mb-4">
               Welcome to Pulse
             </CardTitle>
-            <CardDescription className="text-lg max-w-md mx-auto leading-relaxed">
+            <CardDescription className="text-sm sm:text-base lg:text-lg max-w-md mx-auto leading-relaxed">
               Create your first monitoring project to start tracking your
               website's performance and uptime across the globe.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-8">
+          <CardContent className="space-y-6 sm:space-y-8">
             <form onSubmit={createProject} className="space-y-6">
               <div className="space-y-3">
-                <Label className="font-medium text-base">Project Name</Label>
+                <Label className="font-medium text-sm sm:text-base">Project Name</Label>
                 <Input
                   placeholder="e.g., My Website, E-commerce Store, API Service"
-                  className="h-12 text-lg"
+                  className="h-10 sm:h-12 text-base sm:text-lg"
                   required={true}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
                 <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
                   <Zap className="w-5 h-5 text-yellow-500" />
                   <div>
@@ -110,7 +110,7 @@ function NoProject() {
 
               <Button
                 type="submit"
-                className="w-full py-3 text-lg"
+                className="w-full py-3 text-base sm:text-lg"
                 disabled={loading}
               >
                 {loading ? (

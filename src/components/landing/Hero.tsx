@@ -27,7 +27,7 @@ function Hero() {
           </motion.div>
           
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold max-w-6xl leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold max-w-6xl leading-tight"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -61,7 +61,7 @@ function Hero() {
           </motion.h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-white/70 max-w-4xl leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-white/70 max-w-4xl leading-relaxed px-4 sm:px-0"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
@@ -71,7 +71,7 @@ function Hero() {
           </motion.p>
           
           <motion.div 
-            className="flex flex-col sm:flex-row items-center gap-4 mt-8"
+            className="flex flex-col sm:flex-row items-center gap-4 mt-8 px-4 sm:px-0"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -80,7 +80,7 @@ function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="bg-white text-black rounded-lg text-lg font-semibold px-8 py-4 hover:bg-gray-100 transition-all duration-300">
+              <Button className="bg-white text-black rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-gray-100 transition-all duration-300 w-full sm:w-auto">
                 <RegisterLink className="flex items-center gap-2">
                   Get Started Free
                   <ArrowRight className="w-5 h-5" />
@@ -94,7 +94,7 @@ function Hero() {
             >
               <Button 
                 variant="outline" 
-                className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
+                className="border-white/20 text-white rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-white/10 transition-all duration-300 flex items-center gap-2 w-full sm:w-auto"
                 onClick={() => setIsVideoModalOpen(true)}
               >
                 <Play className="w-5 h-5" />
@@ -104,7 +104,7 @@ function Hero() {
           </motion.div>
           
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 px-4 sm:px-0"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.9 }}
@@ -139,13 +139,13 @@ function Hero() {
           </motion.div>
           
           <motion.div 
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl"
+            className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl px-4 sm:px-0"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 1.3 }}
           >
             <motion.div 
-              className="bg-white/5 rounded-xl p-6 border border-white/10"
+              className="bg-white/5 rounded-xl p-4 sm:p-6 border border-white/10"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.4 }}
@@ -155,7 +155,7 @@ function Hero() {
               <div className="text-white/70">Average Uptime</div>
             </motion.div>
             <motion.div 
-              className="bg-white/5 rounded-xl p-6 border border-white/10"
+              className="bg-white/5 rounded-xl p-4 sm:p-6 border border-white/10"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.5 }}
@@ -165,7 +165,7 @@ function Hero() {
               <div className="text-white/70">Alert Response Time</div>
             </motion.div>
             <motion.div 
-              className="bg-white/5 rounded-xl p-6 border border-white/10"
+              className="bg-white/5 rounded-xl p-4 sm:p-6 border border-white/10"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.6 }}

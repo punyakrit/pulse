@@ -45,39 +45,39 @@ function NoWebiste() {
     <div className="flex items-center justify-center p-4 h-[100vh]">
       <div className="w-full max-w-2xl">
         <Card className="shadow-lg">
-          <CardHeader className="text-center pb-8">
-            <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-              <Monitor className="w-10 h-10 text-primary-foreground" />
+          <CardHeader className="text-center pb-6 sm:pb-8">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Monitor className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground" />
             </div>
-            <CardTitle className="text-3xl font-bold mb-4">
+            <CardTitle className="text-2xl sm:text-3xl font-bold mb-4">
               No Website Found
             </CardTitle>
-            <CardDescription className="text-lg max-w-md mx-auto leading-relaxed">
+            <CardDescription className="text-sm sm:text-base lg:text-lg max-w-md mx-auto leading-relaxed">
               Add your first website to start monitoring its performance, uptime, and get real-time alerts when issues occur.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-8">
+          <CardContent className="space-y-6 sm:space-y-8">
             <form onSubmit={handleCreateWebsite} className="space-y-6">
               <div className="space-y-3">
-                <Label className="font-medium text-base">Website URL</Label>
+                <Label className="font-medium text-sm sm:text-base">Website URL</Label>
                 <div className="relative">
                   <Input
                     placeholder="https://example.com"
-                    className="h-12 text-lg pr-10"
+                    className="h-10 sm:h-12 text-base sm:text-lg pr-10"
                     type="url"
                     required={true}
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                   />
-                  <ExternalLink className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <ExternalLink className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Enter the full URL including https://
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
                 <div className="flex items-center gap-3 p-4 bg-muted rounded-xl">
                   <Zap className="w-5 h-5 text-yellow-500" />
                   <div>
@@ -109,7 +109,7 @@ function NoWebiste() {
 
               <Button
                 type="submit"
-                className="w-full py-3 text-lg bg-primary text-primary-foreground cursor-pointer"
+                className="w-full py-3 text-base sm:text-lg bg-primary text-primary-foreground cursor-pointer"
                 disabled={loading}
               >
                 {loading ? (

@@ -52,7 +52,7 @@ function StartToday() {
             </motion.div>
             
             <motion.h2 
-              className="text-4xl md:text-6xl font-bold text-white leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -70,7 +70,7 @@ function StartToday() {
             </motion.h2>
             
             <motion.p 
-              className="text-xl text-white/70 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-white/70 leading-relaxed"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -80,7 +80,7 @@ function StartToday() {
             </motion.p>
 
             <motion.div 
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -109,7 +109,7 @@ function StartToday() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="bg-white text-black rounded-lg text-lg font-semibold px-8 py-4 hover:bg-gray-100 transition-all duration-300">
+                <Button className="bg-white text-black rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-gray-100 transition-all duration-300 w-full sm:w-auto">
                   <RegisterLink className="flex items-center gap-2">
                     Get Started Free
                     <ArrowRight className="w-5 h-5" />
@@ -121,7 +121,7 @@ function StartToday() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="outline" className="border-white/20 text-white rounded-lg text-lg font-semibold px-8 py-4 hover:bg-white/10 transition-all duration-300">
+                <Button variant="outline" className="border-white/20 text-white rounded-lg text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 hover:bg-white/10 transition-all duration-300 w-full sm:w-auto">
                   <Link href="/contact" className="flex items-center gap-2">
                     Contact Sales
                   </Link>
@@ -146,7 +146,7 @@ function StartToday() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <motion.div 
-              className="bg-white/5 rounded-2xl p-8 border border-white/10"
+              className="bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/10"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -158,9 +158,9 @@ function StartToday() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <h3 className="text-2xl font-bold text-white">Free Plan</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">Free Plan</h3>
                 <div className="text-right">
-                  <div className="text-3xl font-bold text-white">$0</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-white">$0</div>
                   <div className="text-white/60 text-sm">forever</div>
                 </div>
               </motion.div>
@@ -198,7 +198,7 @@ function StartToday() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Button className="w-full bg-white text-black rounded-lg font-semibold py-3 hover:bg-gray-100 transition-all duration-300">
+                <Button className="w-full bg-white text-black rounded-lg font-semibold py-3 hover:bg-gray-100 transition-all duration-300 text-sm sm:text-base">
                   <RegisterLink className="flex items-center justify-center gap-2">
                     Start Free Trial
                     <Zap className="w-4 h-4" />
