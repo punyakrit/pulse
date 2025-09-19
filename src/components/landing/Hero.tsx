@@ -181,7 +181,7 @@ function Hero() {
       <VideoModal
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}
-        videoSrc="/pulse.mp4"
+        videoSrc="https://nooskjgrslpgyitgkovi.supabase.co/storage/v1/object/public/video-upload/pulse%20(1).mp4"
       />
     </div>
   );
